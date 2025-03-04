@@ -154,22 +154,65 @@
 
     <script>
         const questions = [
-            {
-                question: "JavaScript mein `map()` function kya karta hai?",
-                options: ["Loop chalata hai", "Array transform karta hai", "Filter lagata hai", "Object modify karta hai"],
-                answer: 1
-            },
-            {
-                question: "Higher-Order Function kis cheez ko accept kar sakta hai?",
-                options: ["Sirf Numbers", "Sirf Strings", "Function as argument", "Kuch bhi nahi"],
-                answer: 2
-            },
-            {
-                question: "Closure kya hota hai?",
-                options: ["Ek function ka variable", "Function ke andar function", "Ek object", "Koi special function"],
-                answer: 1
-            }
-        ];
+    // Original 9 questions
+    { question: "Higher-Order Function kya hota hai?", options: ["Ek function jo doosre function ko parameter ki tarah leta hai.", "Ek function jo sirf numbers return karta hai.", "Ek function jo sirf strings return karta hai."], answer: 0 },
+    { question: "Closure ka main purpose kya hai?", options: ["Data ko encapsulate karna aur preserve karna.", "Sirf ek function return karna.", "Code ko slow banana."], answer: 0 },
+    { question: "JavaScript me HOF ka example kaunsa hai?", options: [".map()", "for loop", "if statement"], answer: 0 },
+    { question: "Closure me kaunsa concept use hota hai?", options: ["Lexical Scope", "Looping", "Event Bubbling"], answer: 0 },
+    { question: "map() function kya karta hai?", options: ["Ek naye array me transformation apply karta hai", "Ek object modify karta hai", "Koi change nahi karta"], answer: 0 },
+    { question: "filter() function ka use kya hai?", options: ["Ek naye array me specific elements ko filter karna", "Array me loop chalana", "Element ko remove karna"], answer: 0 },
+    { question: "reduce() function ka use kya hai?", options: ["Ek single value generate karna", "Array me se duplicates remove karna", "String ko modify karna"], answer: 0 },
+    { question: "forEach() aur map() me kya difference hai?", options: ["map() ek naye array return karta hai, forEach() nahi", "forEach() naye elements add karta hai", "map() ek object return karta hai"], answer: 0 },
+    { question: "Lexical Scope ka matlab kya hai?", options: ["Function ke andar jo variables hote hain, woh uske scope ke andar access hote hain", "Variable kisi bhi function me use ho sakta hai", "Scope ka koi concept nahi hota"], answer: 0 },
+
+    // Newly added 41 questions
+    { question: "IIFE ka full form kya hai?", options: ["Immediately Invoked Function Expression", "Instant Initialized Function Execution", "Internal Integrated Function Element"], answer: 0 },
+    { question: "Currying function kya hota hai?", options: ["Ek function jo multiple arguments ko sequence me leta hai", "Ek function jo sirf curry recipes banata hai", "Ek type ka loop"], answer: 0 },
+    { question: "Memoization ka use kyu kiya jata hai?", options: ["Performance optimization ke liye", "Memory cleanup ke liye", "Error handling ke liye"], answer: 0 },
+    { question: "Event delegation ka concept kya hai?", options: ["Parent element par event listener lagana", "Har child element ko alag listener dena", "Events ko cancel karna"], answer: 0 },
+    { question: "Prototypal inheritance kya hai?", options: ["JavaScript ka object inheritance model", "Class-based inheritance system", "Ek type ka data structure"], answer: 0 },
+    { question: "'this' keyword ka value kya hota hai?", options: ["Execution context par depend karta hai", "Hamesha window object", "Hamesha undefined"], answer: 0 },
+    { question: "Async/Await kis concept par based hai?", options: ["Promises", "Callbacks", "Events"], answer: 0 },
+    { question: "Hoisting kya hota hai?", options: ["Variable/function declarations ko top par le jana", "Code ko optimize karna", "Memory allocation"], answer: 0 },
+    { question: "Event loop ka kaam kya hai?", options: ["Call stack ko manage karna", "Memory management", "Code parsing"], answer: 0 },
+    { question: "NaN ka type kya hota hai?", options: ["Number", "String", "Boolean"], answer: 0 },
+    { question: "Strict mode ka use kyu karte hain?", options: ["Safer code likhne ke liye", "Faster execution ke liye", "Better styling ke liye"], answer: 0 },
+    { question: "Web workers ka main purpose kya hai?", options: ["Background threading", "DOM manipulation", "Network requests"], answer: 0 },
+    { question: "CORS error ka matlab kya hai?", options: ["Cross-Origin Resource Sharing issue", "Server down hai", "Invalid syntax"], answer: 0 },
+    { question: "Debouncing aur Throttling me antar?", options: ["Execution frequency control", "Memory management techniques", "Data encryption methods"], answer: 0 },
+    { question: "REST API ke characteristics?", options: ["Stateless, Uniform Interface", "Stateful, Protocol Dependent", "Binary Data Focused"], answer: 0 },
+    { question: "JWT kis liye use hota hai?", options: ["Authentication", "Data compression", "Code formatting"], answer: 0 },
+    { question: "Virtual DOM ka concept kya hai?", options: ["Actual DOM ka lightweight copy", "3D rendering technique", "Hardware virtualization"], answer: 0 },
+    { question: "Tree shaking kis se related hai?", options: ["Dead code elimination", "DOM manipulation", "Data structures"], answer: 0 },
+    { question: "Webpack ka primary use case kya hai?", options: ["Module bundling", "Code testing", "Database management"], answer: 0 },
+    { question: "Polyfill kya hota hai?", options: ["Modern features ko purane browsers me add karna", "CSS styling technique", "Error handling method"], answer: 0 },
+    { question: "CSRF attack se kaise bachte hain?", options: ["CSRF tokens use karke", "HTTPS use karke", "CORS enable karke"], answer: 0 },
+    { question: "XSS attack prevention ke liye kya karein?", options: ["User input sanitize karein", "HTTPS use karein", "Caching disable karein"], answer: 0 },
+    { question: "SSR ka advantage kya hai?", options: ["Better SEO", "Faster client-side rendering", "Less server load"], answer: 0 },
+    { question: "CDN ka primary purpose kya hai?", options: ["Content delivery optimize karna", "Database management", "User authentication"], answer: 0 },
+    { question: "DNS resolution kya hota hai?", options: ["Domain name to IP address", "Data encryption", "Server-side rendering"], answer: 0 },
+    { question: "HTTP status code 201 ka matlab?", options: ["Created", "Accepted", "No Content"], answer: 0 },
+    { question: "401 status code ka matlab?", options: ["Unauthorized", "Not Found", "Internal Error"], answer: 0 },
+    { question: "WebSocket protocol kis liye use hota hai?", options: ["Real-time communication", "File transfer", "Database queries"], answer: 0 },
+    { question: "LocalStorage vs SessionStorage?", options: ["Persistence duration difference", "Storage capacity difference", "Data type difference"], answer: 0 },
+    { question: "CORS preflight request kis liye hoti hai?", options: ["Permissions check", "Data validation", "Authentication"], answer: 0 },
+    { question: "OAuth ka primary use case kya hai?", options: ["Third-party authentication", "Data encryption", "Network routing"], answer: 0 },
+    { question: "GraphQL ka advantage REST par?", options: ["Efficient data fetching", "Simpler implementation", "Better caching"], answer: 0 },
+    { question: "Microservices architecture ka benefit?", options: ["Independent deployment", "Tight coupling", "Single codebase"], answer: 0 },
+    { question: "Docker containerization ka purpose?", options: ["Environment consistency", "Code formatting", "Data analysis"], answer: 0 },
+    { question: "CI/CD pipeline ka purpose?", options: ["Automated testing/deployment", "Code documentation", "User authentication"], answer: 0 },
+    { question: "Blockchain ka primary characteristic?", options: ["Immutable ledger", "Centralized control", "High speed"], answer: 0 },
+    { question: "Machine Learning me overfitting kya hai?", options: ["Model trains too specifically", "Insufficient training", "Data imbalance"], answer: 0 },
+    { question: "Neural networks me activation function ka role?", options: ["Non-linearity introduce karna", "Data storage", "Error correction"], answer: 0 },
+    { question: "Big O notation kis liye use hota hai?", options: ["Algorithm complexity", "Data storage size", "Code quality"], answer: 0 },
+    { question: "Blockchain me consensus mechanism example?", options: ["Proof of Work", "Data Encryption", "Hashing"], answer: 0 },
+    { question: "Quantum computing ka advantage classical par?", options: ["Parallel processing", "Higher clock speed", "Cheaper hardware"], answer: 0 },
+    { question: "DevOps ka primary goal kya hai?", options: ["Development aur operations integration", "Code documentation", "UI/UX design"], answer: 0 },
+    { question: "Agile methodology ka principle kya hai?", options: ["Iterative development", "Big upfront planning", "Rigid processes"], answer: 0 },
+    { question: "Scrum me sprint duration typically?", options: ["2-4 weeks", "1 day", "6 months"], answer: 0 },
+    { question: "Kanban ka focus kya hai?", options: ["Continuous delivery", "Sprint planning", "Detailed documentation"], answer: 0 },
+    { question: "TDD me process kya hai?", options: ["Test first, code later", "Code first, test later", "No testing needed"], answer: 0 }
+];
 
         let currentQuestion = 0;
         let attempts = 20;
@@ -245,6 +288,22 @@
         }
 
         displayQuestion();
+        function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function restartGame() {
+        shuffleArray(questions); // Questions ko shuffle kar do
+        currentQuestion = 0;
+        attempts = 20;
+        document.getElementById('message').innerHTML = "";
+        document.querySelector('.progress').style.width = "0%";
+        updateAttempts();
+        displayQuestion();
+    }
     </script>
 </body>
 </html>
