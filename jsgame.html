@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Mastery Challenge</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --radius: 12px;
+            --shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1abc9c 0%, #3498db 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--light);
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--secondary);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        #question {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin: 1.5rem 0;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        #options {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        button {
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-btn {
+            background: var(--light);
+            color: var(--dark);
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .correct {
+            background: var(--success) !important;
+            color: white !important;
+        }
+
+        .wrong {
+            background: var(--danger) !important;
+            color: white !important;
+        }
+
+        #message {
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            min-height: 2rem;
+            font-weight: 600;
+        }
+
+        .restart-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            margin-top: 1.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.05);
+            background: #2980b9;
+        }
+
+        .attempts {
+            text-align: right;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="attempts">Attempts Left: <span id="attempts">20</span></div>
+        <div class="progress-bar">
+            <div class="progress" style="width: 0%"></div>
+        </div>
+        <h1>JavaScript Mastery Challenge</h1>
+        <p id="question">Loading...</p>
+        <div id="options"></div>
+        <p id="message"></p>
+        <button class="restart-btn" onclick="restartGame()">🔄 Restart Challenge</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "JavaScript mein `map()` function kya karta hai?",
+                options: ["Loop chalata hai", "Array transform karta hai", "Filter lagata hai", "Object modify karta hai"],
+                answer: 1
+            },
+            {
+                question: "Higher-Order Function kis cheez ko accept kar sakta hai?",
+                options: ["Sirf Numbers", "Sirf Strings", "Function as argument", "Kuch bhi nahi"],
+                answer: 2
+            },
+            {
+                question: "Closure kya hota hai?",
+                options: ["Ek function ka variable", "Function ke andar function", "Ek object", "Koi special function"],
+                answer: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let attempts = 20;
+
+        function updateProgress() {
+            const progress = (currentQuestion / questions.length) * 100;
+            document.querySelector('.progress').style.width = `${progress}%`;
+        }
+
+        function updateAttempts() {
+            document.getElementById('attempts').textContent = attempts;
+        }
+
+        function displayQuestion() {
+            if (currentQuestion >= questions.length) {
+                document.getElementById('question').innerHTML = "🎉 Congratulations! You've completed the challenge!";
+                document.getElementById('options').innerHTML = "";
+                document.querySelector('.progress').style.width = "100%";
+                return;
+            }
+            
+            document.getElementById('question').textContent = questions[currentQuestion].question;
+            document.getElementById('options').innerHTML = "";
+            
+            questions[currentQuestion].options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span>${index + 1}.</span> ${opt}`;
+                btn.onclick = () => checkAnswer(index);
+                document.getElementById('options').appendChild(btn);
+            });
+            
+            updateProgress();
+            updateAttempts();
+        }
+
+        function checkAnswer(index) {
+            const correctIndex = questions[currentQuestion].answer;
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (index === correctIndex) {
+                buttons[index].classList.add('correct');
+                document.getElementById('message').innerHTML = "✅ Correct!";
+                setTimeout(() => {
+                    currentQuestion++;
+                    displayQuestion();
+                }, 1500);
+            } else {
+                attempts--;
+                updateAttempts();
+                buttons[index].classList.add('wrong');
+                buttons[correctIndex].classList.add('correct');
+                
+                if (attempts <= 0) {
+                    setTimeout(() => {
+                        currentQuestion++;
+                        attempts = 20;
+                        displayQuestion();
+                    }, 2000);
+                }
+            }
+        }
+
+        function restartGame() {
+            currentQuestion = 0;
+            attempts = 20;
+            document.getElementById('message').innerHTML = "";
+            document.querySelector('.progress').style.width = "0%";
+            updateAttempts();
+            displayQuestion();
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
