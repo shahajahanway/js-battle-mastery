@@ -38,7 +38,7 @@ JavaScript – For game logic and interactivity.
 
 Clone this repository:
 
-git clone https://github.com/your-username/js-battle-mastery.git
+git clone https://github.com/shahajahanway/js-battle-mastery
 
 Open index.html in a browser to play the game.
 
