@@ -26,21 +26,13 @@ If attempts run out, the game moves to the next question.
 
 Complete all questions to earn the Mastery Badge!
 
-🛠️ Technologies Used
-
-HTML – For structuring the game UI.
-
-CSS – For styling and animations.
-
-JavaScript – For game logic and interactivity.
-
 📥 Installation & Setup
 
 Clone this repository:
 
 git clone https://github.com/shahajahanway/js-battle-mastery
 
-Open index.html in a browser to play the game.
+Open jsgame.html in a browser to play the game.
 
 🏆 Ready to Become a JavaScript Master?
 
